@@ -1,5 +1,5 @@
-streamlit 
-chromadb 
 crewai
-crewai-tools
-pydantic==2.6.2
+langchain-groq
+chromadb
+python-dotenv
+streamlit
