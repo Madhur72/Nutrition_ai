@@ -71,37 +71,39 @@ def get_user_count():
         count = sum(1 for row in reader)
    return count
  
- 
 class RecipeGenerationSystem:
-   def __init__(self):
-      """Initialize the Recipe Generation System"""
-      pass
- 
-   def create_agents(self) -> Dict[str, Agent]:
-      """Create specialized agents for recipe generation"""
- 
-      recipe_creator = Agent(
+    def __init__(self):
+        """Initialize the Recipe Generation System"""
+        self.llm = Groq(
+            api_key=st.secrets["GROQ_API_KEY"],
+            model_name="llama3-70b-8192"
+        )
+
+    def create_agents(self) -> Dict[str, Agent]:
+        """Create specialized agents for recipe generation"""
+        
+        recipe_creator = Agent(
             role="Recipe Creator",
             goal="""Design low calorie and high protein recipes using the ingredients from the ingredients list
                 that taste good """,
             backstory=""" Former overweight individual turned nutrionist and expert chef, now helping his clients
                 shed pounds while building muscle""",
-            llm="groq/llama3-70b-8192",  # Using string identifier for Groq LLM
+            llm=self.llm,  # Pass the initialized LLM instance
             verbose=True
         )
- 
-      nutrition_expert = Agent(
+
+        nutrition_expert = Agent(
             role="Nutrition Expert",
             goal="Analyze recipe nutrition",
             backstory="Certified nutritionist with recipe analysis expertise",
-            llm="groq/llama3-70b-8192",  # Using string identifier for Groq LLM
+            llm=self.llm,  # Pass the initialized LLM instance
             verbose=True
         )
- 
-      return {
-         "creator": recipe_creator,
-         "nutrition": nutrition_expert
-      }
+
+        return {
+            "creator": recipe_creator,
+            "nutrition": nutrition_expert
+        }
  
    def create_tasks(self, ingredients: List[str], calories: int,
                 dietary_restrictions: List[str], cooking_time: int,
