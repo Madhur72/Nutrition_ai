@@ -6,10 +6,11 @@ from typing import List, Dict, Optional
 from crewai import Agent, Task, Crew, Process
 import json
 import logging
- 
 from dotenv import load_dotenv
 import os
- 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 import chromadb
 client = chromadb.PersistentClient(path="cromadb")
  
