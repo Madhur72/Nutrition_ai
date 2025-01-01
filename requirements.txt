@@ -1,4 +1,4 @@
 streamlit 
-chromadb==0.3.29
 crewai
 crewai-tools
+chromadb==0.3.29
