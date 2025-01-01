@@ -1,5 +1,5 @@
 streamlit
 chromadb
 crewai
-crewai-tools
+'crewai[tools]'
 pysqlite3-binary
