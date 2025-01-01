@@ -1,4 +1,4 @@
 streamlit 
 chromadb 
-crewai==0.74.2
+crewai
 crewai-tools
