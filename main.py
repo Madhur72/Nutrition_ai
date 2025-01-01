@@ -23,7 +23,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
  
 # Set your Groq API key directly here
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")  # Replace with your actual API key
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]  # Replace with your actual API key
  
 # User tracking functions
 def init_user_db():
