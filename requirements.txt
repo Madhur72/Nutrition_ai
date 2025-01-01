@@ -1,5 +1,5 @@
 streamlit
 chromadb
-crewai
-crewai-tools
+crewai==0.85.0
+crewai-tools==0.14.0
 pysqlite3-binary
