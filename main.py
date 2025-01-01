@@ -4,7 +4,6 @@ import sys
 import os
 from typing import List, Dict, Optional
 from crewai import Agent, Task, Crew, Process
-from crewai_tools import BaseTool
 import json
 import logging
 from dotenv import load_dotenv
