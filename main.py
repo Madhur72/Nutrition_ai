@@ -23,8 +23,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
  
 # Set your Groq API key directly here
-GROQ_API_KEY = st.secrets["GROQ_API_KEY"]  # Replace with your actual API key
- 
+os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"] 
 # User tracking functions
 def init_user_db():
    if not os.path.exists("users.csv"):
@@ -75,32 +74,28 @@ def get_user_count():
 class RecipeGenerationSystem:
    def __init__(self):
       """Initialize the Recipe Generation System"""
-      self.llm = LLM(
-         model="groq/llama3-70b-8192",
-         temperature=0.8,
-         api_key=GROQ_API_KEY
-      )
+      pass
  
    def create_agents(self) -> Dict[str, Agent]:
       """Create specialized agents for recipe generation"""
  
       recipe_creator = Agent(
-         role="Recipe Creator",
-         goal="""Design low calorie and high protein recipes using the ingredients from the ingredients list
-            that taste good """,
-         backstory=""" Former overweight individual turned nutrionist and expert chef, now helping his clients
-            shed pounds while building muscle""",
-         llm=self.llm,
-         verbose=True
-      )
+            role="Recipe Creator",
+            goal="""Design low calorie and high protein recipes using the ingredients from the ingredients list
+                that taste good """,
+            backstory=""" Former overweight individual turned nutrionist and expert chef, now helping his clients
+                shed pounds while building muscle""",
+            llm="groq/llama3-70b-8192",  # Using string identifier for Groq LLM
+            verbose=True
+        )
  
       nutrition_expert = Agent(
-         role="Nutrition Expert",
-         goal="Analyze recipe nutrition",
-         backstory="Certified nutritionist with recipe analysis expertise",
-         llm=self.llm,
-         verbose=True
-      )
+            role="Nutrition Expert",
+            goal="Analyze recipe nutrition",
+            backstory="Certified nutritionist with recipe analysis expertise",
+            llm="groq/llama3-70b-8192",  # Using string identifier for Groq LLM
+            verbose=True
+        )
  
       return {
          "creator": recipe_creator,
