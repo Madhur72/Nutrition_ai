@@ -1,4 +1,3 @@
-streamlit 
-chromadb 
-crewai 
-crewai-tools
+crewai
+chromadb
+python-dotenv
